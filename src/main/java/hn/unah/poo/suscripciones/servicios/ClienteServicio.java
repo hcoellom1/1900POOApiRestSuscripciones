@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 
 
 import hn.unah.poo.suscripciones.dtos.ClienteDTO;
+import hn.unah.poo.suscripciones.dtos.DireccioneDTO;
 import hn.unah.poo.suscripciones.modelos.Cliente;
+import hn.unah.poo.suscripciones.modelos.Direcciones;
 import hn.unah.poo.suscripciones.repositorios.ClienteRepositorio;
 
 @Service
@@ -30,6 +32,11 @@ public class ClienteServicio {
         Optional<Cliente> cliente = clienteRepositorio.findById(dni);
         ClienteDTO clienteDto =  this.modelMapper.map(cliente, ClienteDTO.class);
 
+        Direcciones direccion = cliente.get().getDireccion();
+        DireccioneDTO direccioneDTO = this.modelMapper.map(direccion, DireccioneDTO.class);
+        clienteDto.setDireccionDTO(direccioneDTO);
+
+        
         return Optional.ofNullable(clienteDto) ;
     }
 

@@ -2,14 +2,13 @@ package hn.unah.poo.suscripciones.modelos;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,23 +16,23 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name="direcciones")
-public class Direcciones {
-    
+@Table(name="membresias")
+public class Membresias {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="iddireccion")
-    private int idDirecion;
+    @Column(name="idmembresia")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private int idmembresia;
 
-    private String departamento;
+    private double precio;
 
-    private String ciudad;
+    private String descripcion;
 
-    private String colonia;
+    private char tipo;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name="dni", referencedColumnName = "dni")
     @JsonIgnore
     private Cliente cliente;
-
+    
 }
